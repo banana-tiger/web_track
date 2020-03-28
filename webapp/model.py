@@ -12,3 +12,13 @@ class News(db.Model):
 
     def __repr__(self):
         return '<News {} {}>'.format(self.title, self.url)
+
+
+class User(db.Model):   
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(64), index=True, nullable=False, unique=True)
+    password = db.Column(db.String, unique=True, nullable=False)
+    role = db.Column(db.String(10), nullable=False)
+
+    def __repr__(self):
+        return '<User {}'.format(self.username)
