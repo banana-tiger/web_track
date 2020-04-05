@@ -9,16 +9,24 @@
       <li class="nav-item active">
         <a class="nav-link" href="/">Главная страница</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('user.login') }}">Логин</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('user.logout') }}">Выход</a>
-        </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Искать</button>
     </form>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+      {% if current_user.is_authenticated %}
+        <span class="nav-link" href="">Пользователь {{ current_user.username }}</span>
+         {% if current_user.is_admin %}
+          <a class="nav-link" href="{{ url_for('admin.admin_index') }}">Админка</a>
+        {% endif %}
+        <a class="nav-link" href="{{ url_for('user.logout') }}">Выйти</a>
+      {% else %}
+        <a class="nav-link" href="{{ url_for('user.register') }}">Регистрация</a>
+        <a class="nav-link" href="{{ url_for('user.login') }}">Войти</a>
+      {% endif %}
+
+    </ul>
   </div>
 </nav>
