@@ -52,8 +52,12 @@ def process_reg():
         db.session.commit()
         flash('Успешная регистрация')
         return redirect(url_for('user.login'))
-    flash('Форма регистрации заполнена некорректно')
-    return redirect(url_for('user.register'))
+    else:
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash('Ошибка в поле {}: {}'.format(
+                    getattr(form, field).label.text, error))
+        return redirect(url_for('user.register'))
 
 
 @blueprint.route('/logout')
