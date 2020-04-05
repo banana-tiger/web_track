@@ -7,3 +7,4 @@ config.py
 webapp/config.py
 webapp.db
 .vscode/
+webapp.db-journal
